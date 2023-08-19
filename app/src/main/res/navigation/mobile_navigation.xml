@@ -9,7 +9,8 @@
         android:id="@+id/navigation_home"
         android:name="com.example.necomovie.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home"
+        />
 
     <fragment
         android:id="@+id/navigation_upcoming"
@@ -22,9 +23,10 @@
         android:name="com.example.necomovie.ui.notifications.NotificationsFragment"
         android:label="@string/title_search"
         tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/navigation_favourite"
         android:name="com.example.necomovie.ui.notifications.NotificationsFragment"
         android:label="@string/title_favourite"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_favourite" />
 </navigation>
