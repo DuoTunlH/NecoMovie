@@ -1,5 +1,7 @@
 package com.example.necomovie.model;
 
+import java.util.List;
+
 public class MoviesResponse {
-    public Movie[] results;
+    public List<Movie> results;
 }
