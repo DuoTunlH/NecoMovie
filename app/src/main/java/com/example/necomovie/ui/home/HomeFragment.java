@@ -52,10 +52,18 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setAdapter(adapter);
-        homeViewModel.sectionMovies.observe(getViewLifecycleOwner(), new Observer<List<SectionMovies>>() {
+//        homeViewModel.sectionMovies.observe(getViewLifecycleOwner(), new Observer<List<SectionMovies>>() {
+//            @Override
+//            public void onChanged(List<SectionMovies> movies) {
+//                adapter.setSections(movies);
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
+        homeViewModel.fetchedSucessful.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
-            public void onChanged(List<SectionMovies> movies) {
-                adapter.setSections(movies);
+            public void onChanged(Boolean aBoolean) {
+                adapter.setSections(homeViewModel.sectionMovies.getValue());
+                adapter.notifyDataSetChanged();
             }
         });
     }

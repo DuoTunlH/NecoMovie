@@ -24,6 +24,7 @@ public class HomeViewModel extends ViewModel {
 
     //private final MutableLiveData<String> mText;
     MutableLiveData<List<SectionMovies>> sectionMovies = new MutableLiveData<>();
+    MutableLiveData<Boolean> fetchedSucessful = new MutableLiveData<>(false);
 //    EnumMap<Sections,List<Movie>> sectionMovies1;
 //    public String[] sections = {"Trending","Upcoming","Popular","Top Rated"};
 //    MutableLiveData<List<Movie>> trendingMovies = new MutableLiveData<>();
@@ -38,13 +39,15 @@ public class HomeViewModel extends ViewModel {
                 APICaller.getINSTANCE().getMovies(section).enqueue(new Callback<MoviesResponse>() {
                     @Override
                     public void onResponse(Call<MoviesResponse> call, Response<MoviesResponse> response) {
-                        sectionMovies.getValue();
                         List<SectionMovies> sectionMoviesList = sectionMovies.getValue();
                         if (sectionMoviesList == null) {
                             sectionMoviesList = new ArrayList<>();
                             sectionMovies.setValue(sectionMoviesList);
                         }
                         sectionMoviesList.add(new SectionMovies(section, response.body().results));
+                        if (sectionMoviesList.size() == Sections.values().length){
+                            fetchedSucessful.setValue(true);
+                        }
                     }
                     @Override
                     public void onFailure(Call<MoviesResponse> call, Throwable t) {
