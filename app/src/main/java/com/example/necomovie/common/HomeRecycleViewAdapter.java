@@ -25,6 +25,7 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeViewHolder>
     }
     public void setSections(List<SectionMovies> sections){
         this.sections = sections;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override

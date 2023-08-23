@@ -15,9 +15,6 @@ import com.example.necomovie.model.Movie;
 public class SectionViewHolder extends RecyclerView.ViewHolder {
     Context context;
     ImageView image;
-
-
-
     Movie movie;
     public SectionViewHolder(@NonNull View itemView) {
         super(itemView);

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,16 +26,25 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private RecyclerView recyclerView;
+    private HomeViewModel homeViewModel;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-        recyclerView = root.findViewById(R.id.homeRecycleView);
+
+        return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        homeViewModel =
+                new ViewModelProvider(this).get(HomeViewModel.class);
+        recyclerView = view.findViewById(R.id.homeRecycleView);
         homeViewModel.fetchData();
         List<SectionMovies> s = homeViewModel.sectionMovies.getValue();
         HomeRecycleViewAdapter adapter = new HomeRecycleViewAdapter(getContext(), s);
@@ -48,7 +58,6 @@ public class HomeFragment extends Fragment {
                 adapter.setSections(movies);
             }
         });
-        return root;
     }
 
     @Override
