@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.necomovie.R;
 import com.example.necomovie.model.Movie;
 import com.squareup.picasso.Picasso;
@@ -33,7 +34,11 @@ public class SectionRecycleViewAdapter extends RecyclerView.Adapter<SectionViewH
 //                .load("https://media.geeksforgeeks.org/wp-content/cdn-uploads/logo-new-2.svg")
 //                .into(imageView);
         holder.setMovie(list.get(position));
-        Picasso.get().load("https://image.tmdb.org/t/p/w500/" + list.get(position).poster_path).into(holder.image);
+        //holder.textView.setText(list.get(position).original_title);
+        Glide.with(context)
+                .load("https://image.tmdb.org/t/p/w500/" + list.get(position).poster_path)
+                .into(holder.image);
+//        Picasso.get().load("https://image.tmdb.org/t/p/w500/" + list.get(position).poster_path).memoryPolicy(Mo).into(holder.image);
     }
 
 

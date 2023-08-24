@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     final Fragment homeFragment = new HomeFragment();
     final Fragment dashboardFragment = new DashboardFragment();
     final Fragment notificationsFragment = new NotificationsFragment();
+    private Fragment active = homeFragment;
+    FragmentManager fragmentManager = getSupportFragmentManager();
+
     private ActivityMainBinding binding;
 
 
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        setUpFragments();
         replaceFragment(homeFragment);
         binding.navView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -62,10 +66,15 @@ public class MainActivity extends AppCompatActivity {
 //        NavigationUI.setupWithNavController(binding.navView, navController);
     }
     private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.hide(active).show(fragment).commit();
+        active = fragment;
+    }
+
+    private void setUpFragments() {
+        fragmentManager.beginTransaction().add(R.id.frame_layout, notificationsFragment).hide(notificationsFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.frame_layout, dashboardFragment).hide(dashboardFragment).commit();
+        fragmentManager.beginTransaction().add(R.id.frame_layout, homeFragment).commit();
     }
 
 }
