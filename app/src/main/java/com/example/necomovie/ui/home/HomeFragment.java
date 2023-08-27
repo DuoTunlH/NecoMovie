@@ -1,6 +1,7 @@
 package com.example.necomovie.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.necomovie.R;
 import com.example.necomovie.common.HomeRecycleViewAdapter;
+import com.example.necomovie.common.SpacingItemDecorator;
 import com.example.necomovie.databinding.FragmentHomeBinding;
 import com.example.necomovie.model.SectionMovies;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class HomeFragment extends Fragment {
@@ -51,6 +55,8 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        SpacingItemDecorator itemDecorator = new  SpacingItemDecorator(70,0);
+        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
 //        homeViewModel.sectionMovies.observe(getViewLifecycleOwner(), new Observer<List<SectionMovies>>() {
 //            @Override
@@ -62,6 +68,8 @@ public class HomeFragment extends Fragment {
         homeViewModel.fetchedSucessful.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
+
+                Collections.sort(homeViewModel.sectionMovies.getValue());
                 adapter.setSections(homeViewModel.sectionMovies.getValue());
                 adapter.notifyDataSetChanged();
             }

@@ -1,7 +1,6 @@
 package com.example.necomovie.common;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -36,23 +35,17 @@ public class HomeRecycleViewAdapter extends RecyclerView.Adapter<HomeViewHolder>
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         Sections a[] = Sections.values();
-        if(sections != null){
-            for (SectionMovies section : sections
-            ) {
-                Log.e("section",section.getSection() +" " +  a[position]);
-                if(section.getSection() == a[position]) {
-                    LinearLayoutManager layoutManager = new LinearLayoutManager(context);
-                    holder.sectionRecyclerView.setLayoutManager(layoutManager);
-                    layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                    holder.sectionRecyclerView.setAdapter(new SectionRecycleViewAdapter(context, sections.get(position).getMovies()));
-                    holder.setSectionMovies(sections.get(position));
-                    holder.textView.setText(sections.get(position).getSection().name());
-                    return;
-                }
-            }
+        if (sections != null && position < sections.size()) {
+            SectionMovies section = sections.get(position);
+
+            LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+            holder.sectionRecyclerView.setLayoutManager(layoutManager);
+            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+            holder.sectionRecyclerView.setAdapter(new SectionRecycleViewAdapter(context, section.getMovies()));
+            holder.setSectionMovies(section);
+            holder.sectionName.setText(section.getSection().getTitle());
         }
-
-
     }
 
 

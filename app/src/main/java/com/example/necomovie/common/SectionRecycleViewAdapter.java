@@ -30,9 +30,7 @@ public class SectionRecycleViewAdapter extends RecyclerView.Adapter<SectionViewH
 
     @Override
     public void onBindViewHolder(@NonNull SectionViewHolder holder, int position) {
-//        Picasso.with(this)
-//                .load("https://media.geeksforgeeks.org/wp-content/cdn-uploads/logo-new-2.svg")
-//                .into(imageView);
+
         holder.setMovie(list.get(position));
         //holder.textView.setText(list.get(position).original_title);
         Glide.with(context)

@@ -22,15 +22,8 @@ import retrofit2.Response;
 
 public class HomeViewModel extends ViewModel {
 
-    //private final MutableLiveData<String> mText;
     MutableLiveData<List<SectionMovies>> sectionMovies = new MutableLiveData<>();
-    MutableLiveData<Boolean> fetchedSucessful = new MutableLiveData<>(false);
-//    EnumMap<Sections,List<Movie>> sectionMovies1;
-//    public String[] sections = {"Trending","Upcoming","Popular","Top Rated"};
-//    MutableLiveData<List<Movie>> trendingMovies = new MutableLiveData<>();
-//    MutableLiveData<List<Movie>> upcomingMovies = new MutableLiveData<>();
-//    MutableLiveData<List<Movie>> popularMovies = new MutableLiveData<>();
-//    MutableLiveData<List<Movie>> topRatedMovies = new MutableLiveData<>();
+    MutableLiveData<Boolean> fetchedSucessful = new MutableLiveData<>();
     private boolean hasData = false;
     void fetchData() {
         if (!hasData) {

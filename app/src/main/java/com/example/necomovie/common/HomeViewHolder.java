@@ -13,14 +13,24 @@ import com.example.necomovie.model.SectionMovies;
 public class HomeViewHolder extends RecyclerView.ViewHolder {
 
     Context context;
-    TextView textView;
+    TextView sectionName;
+    TextView seeAll;
     RecyclerView sectionRecyclerView;
     SectionMovies sectionMovies;
     public HomeViewHolder(@NonNull View itemView) {
         super(itemView);
         context = itemView.getContext();
         sectionRecyclerView = itemView.findViewById(R.id.recycleView);
-        textView = itemView.findViewById(R.id.textView);
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(0,40);
+        sectionRecyclerView.addItemDecoration(itemDecorator);
+        sectionName = itemView.findViewById(R.id.sectionName);
+        seeAll = itemView.findViewById(R.id.seeAll);
+        seeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     public void setSectionMovies(SectionMovies sectionMovies) {

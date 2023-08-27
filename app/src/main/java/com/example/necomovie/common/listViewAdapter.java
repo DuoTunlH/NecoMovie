@@ -50,7 +50,7 @@ public class listViewAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.home_sections_recycleview, null);
         }
 
-        TextView textView = convertView.findViewById(R.id.textView);
+        TextView textView = convertView.findViewById(R.id.sectionName);
         RecyclerView recyclerView = convertView.findViewById(R.id.recycleView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
