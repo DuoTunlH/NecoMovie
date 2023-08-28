@@ -36,7 +36,6 @@ public class SectionRecycleViewAdapter extends RecyclerView.Adapter<SectionViewH
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500/" + list.get(position).poster_path)
                 .into(holder.image);
-//        Picasso.get().load("https://image.tmdb.org/t/p/w500/" + list.get(position).poster_path).memoryPolicy(Mo).into(holder.image);
     }
 
 
