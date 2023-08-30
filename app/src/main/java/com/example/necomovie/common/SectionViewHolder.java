@@ -25,7 +25,7 @@ public class SectionViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
-                //context.startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }

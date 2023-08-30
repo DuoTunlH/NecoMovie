@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        SpacingItemDecorator itemDecorator = new  SpacingItemDecorator(70,0);
+        SpacingItemDecorator itemDecorator = new  SpacingItemDecorator(50,0);
         recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
 //        homeViewModel.sectionMovies.observe(getViewLifecycleOwner(), new Observer<List<SectionMovies>>() {
