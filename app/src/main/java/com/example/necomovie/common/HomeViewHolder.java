@@ -21,7 +21,7 @@ public class HomeViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         context = itemView.getContext();
         sectionRecyclerView = itemView.findViewById(R.id.recycleView);
-        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(0,40);
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(0,25);
         sectionRecyclerView.addItemDecoration(itemDecorator);
         sectionName = itemView.findViewById(R.id.sectionName);
         seeAll = itemView.findViewById(R.id.seeAll);

@@ -2,8 +2,10 @@ package com.example.necomovie.managers;
 
 import android.util.Log;
 
+import com.example.necomovie.model.Movie;
 import com.example.necomovie.model.MoviesResponse;
 import com.example.necomovie.model.Sections;
+import com.example.necomovie.model.TrailersResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -14,7 +16,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class APICaller {
     static String API_KEY = "f14dabb7ec91ad6abc33ee277d4c4d07";
     static String BASE_URL = "https://api.themoviedb.org/";
-    static MovieService movieService;
     public static APICaller INSTANCE;
     MovieService service;
     private APICaller() {
@@ -41,5 +42,18 @@ public class APICaller {
         String url = "3/" + section.getType() +"/"+ section.getStatus() + time + "?api_key=" + API_KEY + "&with_genres=" + section.getGenreId();
         return service.getMovies(url);
     }
+    public Call<MoviesResponse> getSimilarsById(int id){
+        String url = "3/movie/" + id + "/similar?api_key=" + API_KEY;
+        return service.getMovies(url);
+    }
 
+    public Call<Movie> getMovieById(int id) {
+        String url = "3/movie/"+ id + "?api_key=" + API_KEY;
+        return  service.getMovieById(url);
+    }
+
+    public Call<TrailersResponse> getTrailers(int id){
+        String url = "3/movie/"+ id + "/videos?api_key=" + API_KEY;
+        return  service.getTrailers(url);
+    }
 }

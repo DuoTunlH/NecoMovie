@@ -24,10 +24,8 @@ public class HomeViewModel extends ViewModel {
 
     MutableLiveData<List<SectionMovies>> sectionMovies = new MutableLiveData<>();
     MutableLiveData<Boolean> fetchedSucessful = new MutableLiveData<>();
-    private boolean hasData = false;
+
     void fetchData() {
-        if (!hasData) {
-            hasData = true;
             for (Sections section : Sections.values()) {
                 APICaller.getINSTANCE().getMovies(section).enqueue(new Callback<MoviesResponse>() {
                     @Override
@@ -50,5 +48,3 @@ public class HomeViewModel extends ViewModel {
             }
         }
     }
-
-}
