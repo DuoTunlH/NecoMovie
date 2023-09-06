@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.necomovie.R;
 import com.example.necomovie.model.Movie;
-import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class SectionRecycleViewAdapter extends RecyclerView.Adapter<SectionViewHolder> {
     Context context;
-    List<Movie> list;
+    public List<Movie> list;
 
     public SectionRecycleViewAdapter(Context context, List<Movie> list) {
         this.context = context;
@@ -43,6 +42,6 @@ public class SectionRecycleViewAdapter extends RecyclerView.Adapter<SectionViewH
     public int getItemCount() {
         if(list != null)
             return list.size();
-        return 10;
+        return 0;
     }
 }
