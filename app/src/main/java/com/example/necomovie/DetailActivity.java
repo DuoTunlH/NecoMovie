@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
+import com.example.necomovie.common.GridSpacingItemDecoration;
 import com.example.necomovie.common.HomeRecycleViewAdapter;
 import com.example.necomovie.common.SectionRecycleViewAdapter;
 import com.example.necomovie.common.SpacingItemDecorator;
@@ -50,11 +52,15 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTextView.setText(detailViewModel.movie.overview);
         List<Movie> movies = detailViewModel.similarMovies.getValue();
         SectionRecycleViewAdapter adapter = new SectionRecycleViewAdapter(this, movies);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 //        SpacingItemDecorator itemDecorator = new  SpacingItemDecorator(50,0);
 //        recyclerView.addItemDecoration(itemDecorator);
+        int spanCount = 3;
+        int spacing = 20;
+        boolean includeEdge = false;
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
         recyclerView.setAdapter(adapter);
         detailViewModel.trailers.observe(this, new Observer<List<Trailer>>() {
             @Override
