@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
         recyclerView = view.findViewById(R.id.homeRecycleView);
-        homeViewModel.fetchData();
+
         List<SectionMovies> s = homeViewModel.sectionMovies.getValue();
         HomeRecycleViewAdapter adapter = new HomeRecycleViewAdapter(getContext(), s);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -58,13 +58,7 @@ public class HomeFragment extends Fragment {
         SpacingItemDecorator itemDecorator = new  SpacingItemDecorator(50,0);
         recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
-//        homeViewModel.sectionMovies.observe(getViewLifecycleOwner(), new Observer<List<SectionMovies>>() {
-//            @Override
-//            public void onChanged(List<SectionMovies> movies) {
-//                adapter.setSections(movies);
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
+        homeViewModel.fetchData();
         homeViewModel.fetchedSucessful.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {

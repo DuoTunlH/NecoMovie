@@ -2,33 +2,25 @@ package com.example.necomovie;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toolbar;
 
-import com.example.necomovie.ui.dashboard.DashboardFragment;
+import com.example.necomovie.ui.favourite.FavouriteFragment;
 import com.example.necomovie.ui.home.HomeFragment;
-import com.example.necomovie.ui.notifications.NotificationsFragment;
+import com.example.necomovie.ui.search.SearchFragment;
 import com.google.android.material.appbar.MaterialToolbar;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 import com.example.necomovie.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     final Fragment homeFragment = new HomeFragment();
-    final Fragment dashboardFragment = new DashboardFragment();
-    final Fragment notificationsFragment = new NotificationsFragment();
+    final Fragment dashboardFragment = new FavouriteFragment();
+    final Fragment notificationsFragment = new SearchFragment();
     private Fragment active = homeFragment;
     FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -51,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 int itemId = item.getItemId();
                 if (itemId == R.id.navigation_home) {
                     replaceFragment(homeFragment);
-                } else if (itemId == R.id.navigation_upcoming) {
+                } else if (itemId == R.id.navigation_favourite) {
                     replaceFragment(dashboardFragment);
                 } else if (itemId == R.id.navigation_search) {
                    replaceFragment(notificationsFragment);

@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".DetailActivity">
     <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar_layout" />
+        android:id="@+id/detailToolbar"
+        layout="@layout/detail_toolbar_layout" />
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/detailToolbar"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
@@ -45,8 +45,21 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="7dp"
                 android:text="Year"
-                android:textColor="#3C3C43"
+                android:textColor="#9D9999"
                 android:textSize="17dp" />
+
+            <Button
+                android:id="@+id/favouriteBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:height="65dp"
+                android:backgroundTint="#7803D4"
+                android:text="Add to favourite"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/descriptionTextView"

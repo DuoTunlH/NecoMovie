@@ -34,12 +34,16 @@ public class APICaller {
     }
     public Call<MoviesResponse> getMovies(Sections section){
 
+        return getMovies(section, 1);
+    }
+    public Call<MoviesResponse> getMovies(Sections section, int page){
+
         String time = "";
         if (section.getTime() != ""){
             time = "/" + section.getTime();
         }
 //        let url = "\(Constants.BASE_URL)/3/\(type)/\(status)\(tempTime!)?api_key=\(Constants.API_KEY)\("&query=" + query)&page=\(page)&with_genres=\(genre)"
-        String url = "3/" + section.getType() +"/"+ section.getStatus() + time + "?api_key=" + API_KEY + "&with_genres=" + section.getGenreId();
+        String url = "3/" + section.getType() +"/"+ section.getStatus() + time + "?api_key=" + API_KEY +"&page=" + page + "&with_genres=" + section.getGenreId();
         return service.getMovies(url);
     }
     public Call<MoviesResponse> getSimilarsById(int id){

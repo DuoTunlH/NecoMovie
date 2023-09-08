@@ -34,6 +34,7 @@ public class SectionRecycleViewAdapter extends RecyclerView.Adapter<SectionViewH
         //holder.textView.setText(list.get(position).original_title);
         Glide.with(context)
                 .load("https://image.tmdb.org/t/p/w500/" + list.get(position).poster_path)
+                .placeholder(R.drawable.photo)
                 .into(holder.image);
     }
 
