@@ -19,6 +19,7 @@ public enum Sections {
     HORROR("Horror", "discover", "movie", "", "27"),
     SCIENCE_FICTION("Science Fiction", "discover", "movie", "", "878");
 
+
     private final String title;
     private final String type;
     private final String status;

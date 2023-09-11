@@ -9,6 +9,5 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteY="nav" />
+        android:layout_height="match_parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
