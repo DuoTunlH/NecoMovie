@@ -17,4 +17,6 @@ public interface MovieService {
     Call<Movie> getMovieById(@Url String url);
     @GET
     Call<TrailersResponse> getTrailers(@Url String url);
+    @GET
+    Call<MoviesResponse> search(@Url String url);
 }

@@ -7,6 +7,10 @@ import com.example.necomovie.model.MoviesResponse;
 import com.example.necomovie.model.Sections;
 import com.example.necomovie.model.TrailersResponse;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,5 +63,9 @@ public class APICaller {
     public Call<TrailersResponse> getTrailers(int id){
         String url = "3/movie/"+ id + "/videos?api_key=" + API_KEY;
         return  service.getTrailers(url);
+    }
+    public Call<MoviesResponse> search(String query) {
+        String url = "3/search/movie?api_key=" + API_KEY + "&query=" + query;
+        return service.search(url);
     }
 }

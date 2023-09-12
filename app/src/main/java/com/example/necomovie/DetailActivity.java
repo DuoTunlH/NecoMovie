@@ -61,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20, false));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(3, 20));
         recyclerView.setAdapter(adapter);
         detailViewModel.fetchData();
 
