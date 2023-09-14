@@ -2,14 +2,10 @@ package com.example.necomovie;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -18,45 +14,36 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
     private ConstraintLayout parentLayout;
-    private EditText emailEdt;
-    private EditText passwordEdt;
-    private ImageButton showingPasswordBtn;
-    private CheckBox rememberMeCB;
-    private TextView forgotPasswordTv;
-    private Button signInBtn;
-    private TextView signUpTv;
-    private SignInViewModel signInViewModel;
-
-
+    EditText usernameEdt;
+    EditText emailEdt;
+    EditText passwordEdt;
+    ImageButton showingPasswordBtn;
+    EditText confirmPasswordEdt;
+    ImageButton showingConfirmPasswordBtn;
+    CheckBox checkBox;
+    Button signUpBtn;
+    TextView signInTv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_in);
-        signInViewModel =
-                new ViewModelProvider(this).get(SignInViewModel.class);
+        setContentView(R.layout.activity_sign_up);
         parentLayout = findViewById(R.id.parentLayout);
+        usernameEdt =  findViewById(R.id.usernameEdt);
         emailEdt = (EditText) findViewById(R.id.emailEdt);
         passwordEdt = (EditText) findViewById(R.id.passwordEdt);
         showingPasswordBtn = (ImageButton) findViewById(R.id.showingPasswordBtn);
-        rememberMeCB = (CheckBox) findViewById(R.id.checkBox);
-        forgotPasswordTv = (TextView) findViewById(R.id.forgotPasswordTv);
-        signInBtn = (Button) findViewById(R.id.signInBtn);
-        signUpTv = (TextView) findViewById(R.id.signUpTv);
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
+        confirmPasswordEdt = (EditText) findViewById(R.id.confirmPasswordEdt);
+        showingConfirmPasswordBtn = (ImageButton) findViewById(R.id.showingConfirmPasswordBtn);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
+        signUpBtn = (Button) findViewById(R.id.signUpBtn);
+        signInTv = (TextView) findViewById(R.id.signInTv);
 
-        signUpTv.setOnClickListener(new View.OnClickListener() {
+        signInTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-                startActivity(intent);
+                finish();
             }
         });
         parentLayout.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +65,22 @@ public class SignInActivity extends AppCompatActivity {
                 showingPasswordBtn.setImageResource(R.drawable.showing_password_icon);
                 passwordEdt.setTransformationMethod(new PasswordTransformationMethod());
                 passwordEdt.setSelection(passwordEdt.length());
+            }
+        });
+
+        showingConfirmPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showingConfirmPasswordBtn.setSelected(!showingConfirmPasswordBtn.isSelected());
+                if (showingConfirmPasswordBtn.isSelected()) {
+                    showingConfirmPasswordBtn.setImageResource(R.drawable.hide_password_icon);
+                    confirmPasswordEdt.setTransformationMethod(null);
+                    confirmPasswordEdt.setSelection(confirmPasswordEdt.length());
+                    return;
+                }
+                showingConfirmPasswordBtn.setImageResource(R.drawable.showing_password_icon);
+                confirmPasswordEdt.setTransformationMethod(new PasswordTransformationMethod());
+                confirmPasswordEdt.setSelection(confirmPasswordEdt.length());
             }
         });
 
