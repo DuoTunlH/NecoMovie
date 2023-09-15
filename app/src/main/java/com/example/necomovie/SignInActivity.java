@@ -1,11 +1,14 @@
 package com.example.necomovie;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
@@ -15,8 +18,20 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignInActivity extends AppCompatActivity {
     private ConstraintLayout parentLayout;
@@ -27,28 +42,27 @@ public class SignInActivity extends AppCompatActivity {
     private TextView forgotPasswordTv;
     private Button signInBtn;
     private TextView signUpTv;
-    private SignInViewModel signInViewModel;
-
+    FrameLayout progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_sign_in);
-        signInViewModel =
-                new ViewModelProvider(this).get(SignInViewModel.class);
         parentLayout = findViewById(R.id.parentLayout);
-        emailEdt = (EditText) findViewById(R.id.emailEdt);
-        passwordEdt = (EditText) findViewById(R.id.passwordEdt);
-        showingPasswordBtn = (ImageButton) findViewById(R.id.showingPasswordBtn);
-        rememberMeCB = (CheckBox) findViewById(R.id.checkBox);
-        forgotPasswordTv = (TextView) findViewById(R.id.forgotPasswordTv);
-        signInBtn = (Button) findViewById(R.id.signInBtn);
-        signUpTv = (TextView) findViewById(R.id.signUpTv);
+        emailEdt = findViewById(R.id.emailEdt);
+        passwordEdt = findViewById(R.id.passwordEdt);
+        showingPasswordBtn = findViewById(R.id.showingPasswordBtn);
+        rememberMeCB = findViewById(R.id.checkBox);
+        forgotPasswordTv = findViewById(R.id.forgotPasswordTv);
+        signInBtn = findViewById(R.id.signInBtn);
+        signUpTv = findViewById(R.id.signUpTv);
+        progressBar = findViewById(R.id.progressBar);
+        parentLayout.setEnabled(false);
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                startActivity(intent);
+                signIn();
             }
         });
 
@@ -63,6 +77,13 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 hideSoftKeyboard();
+            }
+        });
+        forgotPasswordTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignInActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
         showingPasswordBtn.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +101,60 @@ public class SignInActivity extends AppCompatActivity {
                 passwordEdt.setSelection(passwordEdt.length());
             }
         });
+//        autoSignIn();
+    }
 
+    private void signIn() {
+        progressBar.setVisibility(View.VISIBLE);
+//        String email = emailEdt.getText().toString();
+//        String password = passwordEdt.getText().toString();
+        String email = "dtnbdlkm@gmail.com";
+        String password = "ductung82";
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (email.isEmpty()) {
+                    Toast.makeText(SignInActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();
+                } else if (password.isEmpty()) {
+                    Toast.makeText(SignInActivity.this, "Please enter password!", Toast.LENGTH_SHORT).show();
+                } else {
+                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            if (task.isSuccessful()) {
+                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            } else {
+                                try {
+                                    throw task.getException();
+                                } catch (FirebaseAuthInvalidUserException e) {
+                                    Toast.makeText(SignInActivity.this, "User not found. Please register.", Toast.LENGTH_SHORT).show();
+                                } catch (FirebaseAuthInvalidCredentialsException e) {
+                                    Toast.makeText(SignInActivity.this, "Invalid password. Please try again.", Toast.LENGTH_SHORT).show();
+                                } catch (FirebaseNetworkException e) {
+                                    Toast.makeText(SignInActivity.this, "Network error. Please check your connection.", Toast.LENGTH_SHORT).show();
+                                } catch (Exception e) {
+                                    Toast.makeText(SignInActivity.this, "Authentication failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        },5000);
+
+
+    }
+
+    private void autoSignIn() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void hideSoftKeyboard() {
