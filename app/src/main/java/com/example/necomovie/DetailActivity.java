@@ -105,7 +105,6 @@ public class DetailActivity extends AppCompatActivity {
                 youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
                     @Override
                     public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-
                         for (Trailer trailer : detailViewModel.trailers.getValue()) {
                             if ("Trailer".equals(trailer.type)) {
                                 youTubePlayer.cueVideo(trailer.key, 0);

@@ -50,7 +50,7 @@ public class APICaller {
         String url = "3/" + section.getType() +"/"+ section.getStatus() + time + "?api_key=" + API_KEY +"&page=" + page + "&with_genres=" + section.getGenreId();
         return service.getMovies(url);
     }
-    public Call<MoviesResponse> getSimilarsById(int id){
+    public Call<MoviesResponse> getSimilarsById(String id){
         String url = "3/movie/" + id + "/similar?api_key=" + API_KEY;
         return service.getMovies(url);
     }
@@ -60,7 +60,7 @@ public class APICaller {
         return  service.getMovieById(url);
     }
 
-    public Call<TrailersResponse> getTrailers(int id){
+    public Call<TrailersResponse> getTrailers(String id){
         String url = "3/movie/"+ id + "/videos?api_key=" + API_KEY;
         return  service.getTrailers(url);
     }

@@ -20,6 +20,13 @@ import com.example.necomovie.common.MovieRecycleViewAdapter;
 import com.example.necomovie.common.SpacingItemDecorator;
 import com.example.necomovie.databinding.FragmentFavouriteBinding;
 import com.example.necomovie.model.Movie;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
@@ -28,6 +35,7 @@ public class FavouriteFragment extends Fragment {
     private FragmentFavouriteBinding binding;
     RecyclerView favouriteRecycleView;
     FavouriteViewModel favouriteViewModel;
+    ListenerRegistration registration;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFavouriteBinding.inflate(inflater, container, false);
@@ -49,9 +57,14 @@ public class FavouriteFragment extends Fragment {
         SpacingItemDecorator itemDecorator = new SpacingItemDecorator(20, 0);
         favouriteRecycleView.addItemDecoration(itemDecorator);
         favouriteRecycleView.setAdapter(adapter);
-
         favouriteViewModel.fetchData();
-
+        CollectionReference ref = FirebaseFirestore.getInstance().collection(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        registration = ref.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+//                favouriteViewModel.fetchData();
+            }
+        });
 
         favouriteViewModel.movies.observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
             @Override
@@ -60,14 +73,13 @@ public class FavouriteFragment extends Fragment {
                 adapter.notifyDataSetChanged();
             }
         });
-
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        registration.remove();
     }
 
 }

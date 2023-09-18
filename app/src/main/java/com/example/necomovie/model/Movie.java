@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class Movie implements Parcelable {
-    public int id;
+    public String id;
     public String original_language;
     public String title;
     public String original_title;
@@ -16,7 +16,7 @@ public class Movie implements Parcelable {
     public String release_date;
 
     protected Movie(Parcel in) {
-        id = in.readInt();
+        id = in.readString();
         original_language = in.readString();
         title = in.readString();
         original_title = in.readString();
@@ -45,7 +45,7 @@ public class Movie implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
-        parcel.writeInt(id);
+        parcel.writeString(id);
         parcel.writeString(original_language);
         parcel.writeString(title);
         parcel.writeString(original_title);
