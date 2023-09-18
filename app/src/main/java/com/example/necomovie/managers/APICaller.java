@@ -55,7 +55,7 @@ public class APICaller {
         return service.getMovies(url);
     }
 
-    public Call<Movie> getMovieById(int id) {
+    public Call<Movie> getMovieById(String id) {
         String url = "3/movie/"+ id + "?api_key=" + API_KEY;
         return  service.getMovieById(url);
     }

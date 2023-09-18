@@ -24,6 +24,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignUpActivity extends AppCompatActivity {
     private ConstraintLayout parentLayout;
@@ -133,13 +134,15 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Confirm password incorrect!", Toast.LENGTH_SHORT).show();
         } else {
             progressBar.setVisibility(View.VISIBLE);
-            parentLayout.setClickable(false);
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     progressBar.setVisibility(View.INVISIBLE);
-                    parentLayout.setClickable(true);
                     if (task.isSuccessful()) {
+                        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                .setDisplayName(username)
+                                .build();
+                        task.getResult().getUser().updateProfile(profileUpdates);
                         Toast.makeText(SignUpActivity.this, "Sign up successfully. Please go back to sign in screen", Toast.LENGTH_LONG).show();
                     } else {
                         try {

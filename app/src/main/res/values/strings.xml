@@ -12,6 +12,7 @@
     <string name="sign_up_bold"><b>Sign Up</b></string>
     <string name="forgot_password_bold"><b>Forgot Password?</b></string>
     <string name="forgot_password_description">Enter your email and we\'ll send you a link to reset your password</string>
+    <string name="favourite_bold"><b>Favourite</b></string>
     <string name="terms"><u>Terms &amp; Conditions</u></string>
 
 </resources>

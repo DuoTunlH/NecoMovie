@@ -1,32 +1,67 @@
 package com.example.necomovie.ui.favourite;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.necomovie.DetailActivity;
+import com.example.necomovie.R;
+import com.example.necomovie.common.MovieRecycleViewAdapter;
+import com.example.necomovie.common.SpacingItemDecorator;
 import com.example.necomovie.databinding.FragmentFavouriteBinding;
+import com.example.necomovie.model.Movie;
+
+import java.util.List;
 
 public class FavouriteFragment extends Fragment {
 
     private FragmentFavouriteBinding binding;
+    RecyclerView favouriteRecycleView;
+    FavouriteViewModel favouriteViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFavouriteBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        favouriteRecycleView = view.findViewById(R.id.favouriteRecycleView);
+        favouriteViewModel = new ViewModelProvider(this).get(FavouriteViewModel.class);
+        List<Movie> movies = favouriteViewModel.movies.getValue();
+        MovieRecycleViewAdapter adapter = new MovieRecycleViewAdapter(getContext(), movies);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        favouriteRecycleView.setLayoutManager(layoutManager);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        SpacingItemDecorator itemDecorator = new SpacingItemDecorator(20, 0);
+        favouriteRecycleView.addItemDecoration(itemDecorator);
+        favouriteRecycleView.setAdapter(adapter);
+
+        favouriteViewModel.fetchData();
+
+
+        favouriteViewModel.movies.observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                adapter.list = movies;
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+
     }
 
     @Override
@@ -34,4 +69,5 @@ public class FavouriteFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

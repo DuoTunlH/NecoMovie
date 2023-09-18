@@ -105,48 +105,40 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void signIn() {
-        progressBar.setVisibility(View.VISIBLE);
 //        String email = emailEdt.getText().toString();
 //        String password = passwordEdt.getText().toString();
         String email = "dtnbdlkm@gmail.com";
         String password = "ductung82";
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (email.isEmpty()) {
-                    Toast.makeText(SignInActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();
-                } else if (password.isEmpty()) {
-                    Toast.makeText(SignInActivity.this, "Please enter password!", Toast.LENGTH_SHORT).show();
-                } else {
-                    FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressBar.setVisibility(View.INVISIBLE);
-                            if (task.isSuccessful()) {
-                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                try {
-                                    throw task.getException();
-                                } catch (FirebaseAuthInvalidUserException e) {
-                                    Toast.makeText(SignInActivity.this, "User not found. Please register.", Toast.LENGTH_SHORT).show();
-                                } catch (FirebaseAuthInvalidCredentialsException e) {
-                                    Toast.makeText(SignInActivity.this, "Invalid password. Please try again.", Toast.LENGTH_SHORT).show();
-                                } catch (FirebaseNetworkException e) {
-                                    Toast.makeText(SignInActivity.this, "Network error. Please check your connection.", Toast.LENGTH_SHORT).show();
-                                } catch (Exception e) {
-                                    Toast.makeText(SignInActivity.this, "Authentication failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
-                            }
+        if (email.isEmpty()) {
+            Toast.makeText(SignInActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();
+        } else if (password.isEmpty()) {
+            Toast.makeText(SignInActivity.this, "Please enter password!", Toast.LENGTH_SHORT).show();
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password).addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else {
+                        try {
+                            throw task.getException();
+                        } catch (FirebaseAuthInvalidUserException e) {
+                            Toast.makeText(SignInActivity.this, "User not found. Please register.", Toast.LENGTH_SHORT).show();
+                        } catch (FirebaseAuthInvalidCredentialsException e) {
+                            Toast.makeText(SignInActivity.this, "Invalid password. Please try again.", Toast.LENGTH_SHORT).show();
+                        } catch (FirebaseNetworkException e) {
+                            Toast.makeText(SignInActivity.this, "Network error. Please check your connection.", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            Toast.makeText(SignInActivity.this, "Authentication failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    });
+                    }
                 }
-            }
-        },5000);
-
-
+            });
+        }
     }
 
     private void autoSignIn() {
