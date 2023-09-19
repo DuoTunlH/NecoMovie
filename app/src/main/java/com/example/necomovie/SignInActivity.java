@@ -58,7 +58,6 @@ public class SignInActivity extends AppCompatActivity {
         signInBtn = findViewById(R.id.signInBtn);
         signUpTv = findViewById(R.id.signUpTv);
         progressBar = findViewById(R.id.progressBar);
-        parentLayout.setEnabled(false);
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,7 +100,7 @@ public class SignInActivity extends AppCompatActivity {
                 passwordEdt.setSelection(passwordEdt.length());
             }
         });
-//        autoSignIn();
+        autoSignIn();
     }
 
     private void signIn() {
@@ -122,7 +121,9 @@ public class SignInActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.INVISIBLE);
                     if (task.isSuccessful()) {
                         Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                        finish();
                     } else {
                         try {
                             throw task.getException();

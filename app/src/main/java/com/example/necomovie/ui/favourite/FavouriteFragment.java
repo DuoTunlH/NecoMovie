@@ -35,7 +35,7 @@ public class FavouriteFragment extends Fragment {
     private FragmentFavouriteBinding binding;
     RecyclerView favouriteRecycleView;
     FavouriteViewModel favouriteViewModel;
-    ListenerRegistration registration;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentFavouriteBinding.inflate(inflater, container, false);
@@ -59,12 +59,7 @@ public class FavouriteFragment extends Fragment {
         favouriteRecycleView.setAdapter(adapter);
         favouriteViewModel.fetchData();
         CollectionReference ref = FirebaseFirestore.getInstance().collection(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        registration = ref.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-//                favouriteViewModel.fetchData();
-            }
-        });
+
 
         favouriteViewModel.movies.observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
             @Override
@@ -79,7 +74,7 @@ public class FavouriteFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        registration.remove();
+        favouriteViewModel.registration.remove();
     }
 
 }

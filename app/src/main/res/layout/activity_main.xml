@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/parentLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
@@ -12,16 +13,18 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
+        app:backgroundTint="@color/black"
+        app:itemIconTint="#7803D5"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:itemIconTint="#7803D5"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="unlabeled"
-        app:backgroundTint="@color/black"/>
-<include
-    android:id="@+id/toolbar"
-    layout="@layout/home_toolbar_layout" />
+        app:menu="@menu/bottom_nav_menu" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/home_toolbar_layout" />
+
     <FrameLayout
         android:id="@+id/frame_layout"
         android:name="androidx.navigation.fragment.NavHostFragment"

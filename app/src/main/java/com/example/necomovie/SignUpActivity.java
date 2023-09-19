@@ -38,12 +38,13 @@ public class SignUpActivity extends AppCompatActivity {
     Button signUpBtn;
     TextView signInTv;
     ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         parentLayout = findViewById(R.id.parentLayout);
-        usernameEdt =  findViewById(R.id.usernameEdt);
+        usernameEdt = findViewById(R.id.usernameEdt);
         emailEdt = (EditText) findViewById(R.id.emailEdt);
         passwordEdt = (EditText) findViewById(R.id.passwordEdt);
         showingPasswordBtn = (ImageButton) findViewById(R.id.showingPasswordBtn);
@@ -104,12 +105,14 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
+
     private void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         if (getCurrentFocus() != null) {
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         }
     }
+
     private void signUp() {
         String username = usernameEdt.getText().toString();
         String email = emailEdt.getText().toString();
@@ -118,7 +121,7 @@ public class SignUpActivity extends AppCompatActivity {
         String passwordRegex = "^.{8,}$";
         String emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}";
 
-        if (username.isEmpty()){
+        if (username.isEmpty()) {
             Toast.makeText(this, "Please enter username!", Toast.LENGTH_SHORT).show();
         } else if (email.isEmpty()) {
             Toast.makeText(this, "Please enter email!", Toast.LENGTH_SHORT).show();

@@ -50,17 +50,19 @@
                 android:textSize="17dp" />
 
             <Button
+                android:drawableLeft="@drawable/heart"
                 android:id="@+id/favouriteBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
                 android:height="65dp"
                 android:backgroundTint="#7803D4"
                 android:text="Add to favourite"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/descriptionTextView"

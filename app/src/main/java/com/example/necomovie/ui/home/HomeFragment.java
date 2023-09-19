@@ -1,7 +1,6 @@
 package com.example.necomovie.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.example.necomovie.common.SpacingItemDecorator;
 import com.example.necomovie.databinding.FragmentHomeBinding;
 import com.example.necomovie.model.SectionMovies;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,7 +57,7 @@ public class HomeFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(adapter);
         homeViewModel.fetchData();
-        homeViewModel.fetchedSucessful.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+        homeViewModel.isFetchedSucessful.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
 

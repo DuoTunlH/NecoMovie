@@ -78,6 +78,7 @@ public class SearchFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         searchViewModel.fetchData();
+
         searchViewModel.movies.observe(getViewLifecycleOwner(), new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> list) {
@@ -139,4 +140,5 @@ public class SearchFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }

@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
         yearTextView = (TextView) findViewById(R.id.yearTextView);
         descriptionTextView = (TextView) findViewById(R.id.descriptionTextView);
         recyclerView = (RecyclerView) findViewById(R.id.detailRecycleView);
-        titleTextView.setText(detailViewModel.movie.original_title);
+        titleTextView.setText((detailViewModel.movie.title != null) ? detailViewModel.movie.title : detailViewModel.movie.original_title);
         yearTextView.setText(detailViewModel.movie.release_date);
         descriptionTextView.setText(detailViewModel.movie.overview);
         List<Movie> movies = detailViewModel.similarMovies.getValue();
