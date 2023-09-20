@@ -43,7 +43,6 @@ public class DetailActivity extends AppCompatActivity {
     TextView descriptionTextView;
     RecyclerView recyclerView;
     DetailViewModel detailViewModel;
-    FavouriteViewModel favouriteViewModel;
     MaterialToolbar toolbar;
     ImageButton backButton;
     Button favouriteBtn;
@@ -51,7 +50,6 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        favouriteViewModel = new ViewModelProvider(this).get(FavouriteViewModel.class);
         detailViewModel = new ViewModelProvider(this).get(DetailViewModel.class);
         detailViewModel.movie = getIntent().getParcelableExtra("movie");
         youTubePlayerView = findViewById(R.id.youtube_player_view);

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageButton;
 
+import com.bumptech.glide.Glide;
 import com.example.necomovie.ui.favourite.FavouriteFragment;
 import com.example.necomovie.ui.home.HomeFragment;
 import com.example.necomovie.ui.search.SearchFragment;
@@ -20,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.necomovie.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     final Fragment homeFragment = new HomeFragment();
@@ -43,6 +45,14 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         setUpFragments();
         replaceFragment(homeFragment);
+
+        if(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null) {
+            Glide.with(this)
+                    .load(FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl())
+                    .circleCrop()
+                    .placeholder(R.drawable.person_circle_fill)
+                    .into(profileBtn);
+        }
         profileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

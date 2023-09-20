@@ -38,6 +38,7 @@ public class DetailViewModel extends ViewModel {
     MutableLiveData<List<Movie>> similarMovies = new MutableLiveData<>();
     MutableLiveData<Boolean> isFavourite = new MutableLiveData<>(false);
 
+
     void fetchData() {
         APICaller.getINSTANCE().getTrailers(movie.id).enqueue(new Callback<TrailersResponse>() {
             @Override
