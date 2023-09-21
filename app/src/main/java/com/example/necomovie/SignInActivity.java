@@ -107,7 +107,7 @@ public class SignInActivity extends AppCompatActivity {
 //        String email = emailEdt.getText().toString();
 //        String password = passwordEdt.getText().toString();
         String email = "dtnbdlkm2@gmail.com";
-        String password = "12345678";
+        String password = "123456789";
 
         if (email.isEmpty()) {
             Toast.makeText(SignInActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();

@@ -68,14 +68,11 @@
                     android:textColorHint="#80FFFFFF"
                     app:shapeAppearanceOverlay="@style/rounded_corner" />
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="51dp">
+                    android:layout_height="51dp"
+                    android:layout_marginTop="16dp">
 
                     <EditText
                         android:id="@+id/passwordEdt"
@@ -206,18 +203,13 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/insta_icon" />
 
-                <View
-                    android:layout_width="45dp"
-                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:layout_width="48dp"
                     android:layout_height="match_parent"
-                    android:src="@drawable/twitter_icon" />
-
-                <View
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content" />
+                    android:src="@drawable/twitter_icon"
+                    android:layout_marginStart="45dp"
+                    android:layout_marginEnd="40dp"/>
 
                 <ImageView
                     android:layout_width="48dp"

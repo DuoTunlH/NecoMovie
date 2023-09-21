@@ -68,9 +68,6 @@
                     android:textColorHint="#80FFFFFF"
                     app:shapeAppearanceOverlay="@style/rounded_corner" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp" />
 
                 <EditText
                     android:id="@+id/emailEdt"
@@ -80,18 +77,17 @@
                     android:ems="10"
                     android:hint="Email"
                     android:inputType="text|textEmailAddress"
+                    android:layout_marginTop="16dp"
                     android:paddingLeft="15dp"
                     android:textColor="@color/white"
                     android:textColorHint="#80FFFFFF"
                     app:shapeAppearanceOverlay="@style/rounded_corner" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="51dp">
+                    android:layout_height="51dp"
+                    android:layout_marginTop="16dp">
 
                     <EditText
                         android:id="@+id/passwordEdt"
@@ -103,6 +99,7 @@
                         android:inputType="text|textPassword"
                         android:paddingLeft="15dp"
                         android:textColor="@color/white"
+
                         android:textColorHint="#80FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -124,13 +121,11 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="16dp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="51dp">
+                    android:layout_height="51dp"
+                    android:layout_marginTop="16dp">
 
                     <EditText
                         android:id="@+id/confirmPasswordEdt"
@@ -142,6 +137,7 @@
                         android:inputType="text|textPassword"
                         android:paddingLeft="15dp"
                         android:textColor="@color/white"
+
                         android:textColorHint="#80FFFFFF"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -42,31 +42,14 @@ public class ProfileActivity extends AppCompatActivity {
     Button saveBtn;
     ProfileViewModel profileViewModel;
     ConstraintLayout parentLayout;
-    private static final int PICK_IMAGE_REQUEST = 1;
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == Activity.RESULT_OK) {
-            Uri uri = data.getData();
-            Glide.with(this)
-                    .load(uri)
-                    .circleCrop()
-                    .placeholder(R.drawable.person_circle_fill)
-                    .into(avatarIv);
-            profileViewModel.changeAvatar(uri);
-        } else if (resultCode == ImagePicker.RESULT_ERROR) {
-            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
-        }
-    }
+    ConstraintLayout changePasswordLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        changePasswordLayout = findViewById(R.id.changePasswordLayout);
         toolbar = findViewById(R.id.toolbar);
         backBtn = findViewById(R.id.backButton);
         saveBtn = findViewById(R.id.saveBtn);
@@ -88,6 +71,13 @@ public class ProfileActivity extends AppCompatActivity {
                     .placeholder(R.drawable.person_circle_fill)
                     .into(avatarIv);
         }
+        changePasswordLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         changeAvatarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,6 +144,23 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            Uri uri = data.getData();
+            Glide.with(this)
+                    .load(uri)
+                    .circleCrop()
+                    .placeholder(R.drawable.person_circle_fill)
+                    .into(avatarIv);
+            profileViewModel.changeAvatar(uri);
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void hideSoftKeyboard() {
