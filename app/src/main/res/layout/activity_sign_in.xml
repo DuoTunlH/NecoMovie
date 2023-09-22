@@ -152,6 +152,7 @@
                 android:layout_marginTop="80dp"
                 android:background="@drawable/rounded_btn_bg"
                 android:text="Sign In"
+                android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
