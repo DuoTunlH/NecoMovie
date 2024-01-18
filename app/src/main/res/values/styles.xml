@@ -4,8 +4,5 @@
     <style name="rounded_corner">
         <item name="cornerSize">10dp</item>
     </style>
-    <style name="AppTheme_Activity1" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowTranslucentStatus">true</item>
-    </style>
 </resources>
 

@@ -157,11 +157,7 @@ public class DetailActivity extends AppCompatActivity {
         detailViewModel.isFavourite.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    favouriteBtn.setText("Remove from favourite");
-                } else {
-                    favouriteBtn.setText("Add to favourite");
-                }
+                favouriteBtn.setText(aBoolean ? "Remove from favourite" : "Add to favourite");
             }
         });
         detailViewModel.trailers.observe(this, new Observer<List<Trailer>>() {

@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
     MaterialToolbar toolbar;
     private ActivityMainBinding binding;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

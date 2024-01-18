@@ -103,10 +103,11 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void signIn() {
-//        String email = emailEdt.getText().toString();
-//        String password = passwordEdt.getText().toString();
-        String email = "dtnbdlkm2@gmail.com";
-        String password = "12345678";
+        hideSoftKeyboard();
+        String email = emailEdt.getText().toString();
+        String password = passwordEdt.getText().toString();
+//        String email = "dtnbdlkm2@gmail.com";
+//        String password = "12345678";
 
         if (email.isEmpty()) {
             Toast.makeText(SignInActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();

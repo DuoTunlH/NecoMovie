@@ -18,7 +18,7 @@ import retrofit2.Response;
 public class HomeViewModel extends ViewModel {
 
     MutableLiveData<List<SectionMovies>> sectionMovies = new MutableLiveData<>();
-    MutableLiveData<Boolean> isFetchedSucessful = new MutableLiveData<>();
+    MutableLiveData<Boolean> isFetchedSuccessful = new MutableLiveData<>();
 
     void fetchData() {
             for (Sections section : Sections.values()) {
@@ -32,7 +32,7 @@ public class HomeViewModel extends ViewModel {
                         }
                         sectionMoviesList.add(new SectionMovies(section, response.body().results));
                         if (sectionMoviesList.size() == Sections.values().length){
-                            isFetchedSucessful.setValue(true);
+                            isFetchedSuccessful.setValue(true);
                         }
                     }
                     @Override
